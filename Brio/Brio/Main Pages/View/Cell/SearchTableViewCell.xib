@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="114" id="KGk-i7-Jjw" customClass="SearchTableViewCell" customModule="Brio" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-human" translatesAutoresizingMaskIntoConstraints="NO" id="wIm-EE-E1z">
+                        <rect key="frame" x="8" y="18" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="HMp-pK-SS3"/>
+                            <constraint firstAttribute="height" constant="44" id="gY7-Jw-7Xi"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1T-Jn-KbP">
+                        <rect key="frame" x="319" y="25" width="75" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="フォロー"/>
+                        <connections>
+                            <action selector="followWithButton:" destination="KGk-i7-Jjw" eventType="touchDown" id="ZrT-Zh-AjZ"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dP5-7n-mMj">
+                        <rect key="frame" x="69" y="0.0" width="235" height="82"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="dP5-7n-mMj" firstAttribute="leading" secondItem="wIm-EE-E1z" secondAttribute="trailing" constant="8" id="2Sr-gg-s7Q"/>
+                    <constraint firstItem="wIm-EE-E1z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="DPL-bH-31U"/>
+                    <constraint firstItem="dP5-7n-mMj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="KuM-QN-gfT"/>
+                    <constraint firstItem="wIm-EE-E1z" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fqN-q9-5Jp"/>
+                    <constraint firstAttribute="trailing" secondItem="dP5-7n-mMj" secondAttribute="trailing" constant="16" id="ixM-yR-LRY"/>
+                    <constraint firstAttribute="bottom" secondItem="dP5-7n-mMj" secondAttribute="bottom" constant="16" id="ovj-HG-pWo"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="followButton" destination="I1T-Jn-KbP" id="3M9-Rg-AsS"/>
+                <outlet property="userImageView" destination="wIm-EE-E1z" id="zzu-t0-PQl"/>
+                <outlet property="userNameLabel" destination="dP5-7n-mMj" id="dFD-on-KUX"/>
+            </connections>
+            <point key="canvasLocation" x="39" y="57"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="placeholder-human" width="250" height="250"/>
+    </resources>
+</document>

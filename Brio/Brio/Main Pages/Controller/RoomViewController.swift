@@ -296,7 +296,7 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         userModel.displayName = user.object(forKey: "displayName") as? String
                         
                         // 投稿の情報を取得
-                        let imageUrl = postObject.object(forKey: "imageUrl") as! String
+                        let imageUrl = user.object(forKey: "imageUrl") as! String
                         let text = postObject.object(forKey: "text") as! String
                         
                         // 2つのデータ(投稿情報と誰が投稿したか?)を合わせてPostクラスにセット

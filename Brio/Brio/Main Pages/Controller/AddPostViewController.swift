@@ -51,7 +51,16 @@ class AddPostViewController: UIViewController, UINavigationControllerDelegate,UI
     
     @IBAction func share() {
         SVProgressHUD.show()
-
+        guard let user = NCMBUser.current(), let nCMBObject = NCMBObject.init(className: "Post") else {
+            return
+        }
+        
+        nCMBObject.setObject(postTextView.text, forKey: "text")
+        nCMBObject.setObject(user, forKey: "user")
+        nCMBObject.saveInBackground { userBlock in
+            SVProgressHUD.dismiss()           
+        }
+        
     }
     
     @IBAction func cancel() {

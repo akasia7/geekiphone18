@@ -149,6 +149,20 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     //ユーザーを読み込む
     func loadUsers(searchText: String?) {
+        guard let searchText = searchText else {
+            return
+        }
+
+        let nCMBQuery = NCMBQuery.init(className: "Follow")
+        nCMBQuery?.addDescendingOrder("createDate")
+        nCMBQuery?.findObjectsInBackground{ items, error in
+            //items?.forEach()
+            print(items)
+        }
+        //let nCMBObject = NCMBObject.init(className: "Follo")
+        //nCMBObject.order
+        //query?.order(byDescending: "createDate")
+        /*
         let query = NCMBUser.query()
         
         // 自分を除外
@@ -181,6 +195,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                 self.loadFollowingUserIds()
             }
         })
+ */
     }
 
    

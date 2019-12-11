@@ -16,6 +16,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     var postId: String!
     
     var comments = [Comment]()
+    var user:[NCMBUser] = []
     
     @IBOutlet var commentTableView: UITableView!
     
@@ -53,14 +54,19 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         let userNameLabel = cell.viewWithTag(2) as! UILabel
         let commentLabel = cell.viewWithTag(3) as! UILabel
         // ユーザー画像を丸く
-        userImageView.layer.cornerRadius = userImageView.bounds.width / 2.0
+        userImageView.layer.cornerRadius = 22.0
         userImageView.layer.masksToBounds = true
+        userImageView.clipsToBounds = true
         
         let user = comments[indexPath.row].user
-        let userImagePath = "https://mbaas.api.nifcloud.com/2013-09-01/applications/HlgrPhqq9ECHzZT3/publicFiles/"  + user.objectId
+        //let userImagePath = "https://mbaas.api.nifcloud.com/2013-09-01/applications/HlgrPhqq9ECHzZT3/publicFiles/"  + user.objectId
         
-        
-        userImageView.kf.setImage(with: URL(string: userImagePath))
+        let currentUser = self.user[indexPath.row]
+        guard let userImagePath = currentUser.object(forKey: "imageUrl") as? String else {
+            return cell
+        }
+        let url = URL(string:userImagePath)
+        userImageView.kf.setImage(with: url)
         userNameLabel.text = user.displayName
         commentLabel.text = comments[indexPath.row].text
         
@@ -72,13 +78,17 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         let query = NCMBQuery(className: "Comment")
         query?.whereKey("postId", equalTo: postId)
         query?.includeKey("user")
-        query?.findObjectsInBackground({ (result, error) in
+        query?.findObjectsInBackground({[weak self] (result, error) in
+            guard let self = self else { return }
             if error != nil {
                 SVProgressHUD.showError(withStatus: error!.localizedDescription)
             } else {
+                self.user = []
                 for commentObject in result as! [NCMBObject] {
                     // コメントをしたユーザーの情報を取得
+                    
                     let user = commentObject.object(forKey: "user") as! NCMBUser
+                    self.user.append(user)
                     let userModel = User(objectId: user.objectId, userName: user.userName)
                     userModel.displayName = user.object(forKey: "displayName") as? String
                     

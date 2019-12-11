@@ -40,7 +40,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         loadUsers(searchText: nil)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -49,7 +49,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
-    
+
     func setSearchBar() {
         // NavigationBarにSearchBarをセット
         if let navigationBarFrame = self.navigationController?.navigationBar.bounds {
@@ -161,12 +161,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         // 退会済みアカウントを除外
         query?.whereKey("active", notEqualTo: false)
-        
+
         // 検索ワードがある場合
         if let text = searchText {
             query?.whereKey("userName", equalTo: text)
         }
-        
+
         // 新着ユーザー50人だけ拾う
         query?.limit = 50
         
@@ -219,6 +219,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             }
         }
     }
-    
+
 }
 

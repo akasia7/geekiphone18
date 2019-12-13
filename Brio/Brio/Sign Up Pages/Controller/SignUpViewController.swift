@@ -11,16 +11,18 @@ import NCMB
 
 // UITextFieldDelegate（デリゲート）をもちいるためにSignUpViewControllerはUITextFieldDelegatewを継承する
 class SignUpViewController: UIViewController, UITextFieldDelegate {
-
+    
+    @IBOutlet var displayNameTextField: UITextField!
     @IBOutlet var userIdTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var confirmField: UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        displayNameTextField.delegate = self
         userIdTextField.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -30,7 +32,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         confirmField.isSecureTextEntry = true
         
         // textFieldの境界線をつける
-        [userIdTextField, emailTextField, passwordTextField, confirmField].forEach { (textField) in
+        [displayNameTextField, userIdTextField, emailTextField, passwordTextField, confirmField].forEach { (textField) in
             textField?.layer.borderColor = UIColor.black.cgColor
             textField?.layer.borderWidth = 1.0
         }

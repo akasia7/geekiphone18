@@ -21,9 +21,9 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet var commentTableView: UITableView!
     
     /*  viewDidLoad＝ViewControllerのviewがリロードされた後に呼び出される、
-           つまり立ち上げたときに最初に開かれる画面  */
-       /*  InterfaceBuilder(Storyboardやxib)を使用している場合、
-           サブビューのセットアップは一般的にここで行うことになる  */
+     つまり立ち上げたときに最初に開かれる画面  */
+    /*  InterfaceBuilder(Storyboardやxib)を使用している場合、
+     サブビューのセットアップは一般的にここで行うことになる  */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,10 +38,10 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         loadComments()
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-       
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

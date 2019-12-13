@@ -19,9 +19,9 @@ class MyPageViewController: UIViewController {
     @IBOutlet var userIntroductionTextView: UITextView!
     
     /*  viewDidLoad＝ViewControllerのviewがリロードされた後に呼び出される、
-        つまり立ち上げたときに最初に開かれる画面  */
+     つまり立ち上げたときに最初に開かれる画面  */
     /*  InterfaceBuilder(Storyboardやxib)を使用している場合、
-        サブビューのセットアップは一般的にここで行うことになる  */
+     サブビューのセットアップは一般的にここで行うことになる  */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,10 +34,10 @@ class MyPageViewController: UIViewController {
         //  画像の中心とImageViewの中心は同じになる
         userImageView.contentMode = .scaleAspectFill
         userImageView.clipsToBounds = true
-
+        
     }
     
-        //  viewWillAppear＝viewが表示される直前に呼ばれる
+    //  viewWillAppear＝viewが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -114,23 +114,23 @@ class MyPageViewController: UIViewController {
                 }
             }
         }
-
+        
         
         let deleteAction = UIAlertAction(title: "退会", style: .default)
         { (action) in
             let user = NCMBUser.current()
             user?.deleteInBackground({ (error) in
-            if error != nil {
-                print(error)
+                if error != nil {
+                    print(error)
                 } else {
-                let storyboard  = UIStoryboard(name: "SignIn", bundle: Bundle.main)
-                let rootViewController = storyboard.instantiateViewController(withIdentifier:
-                "RootNavigationController")
-                 
-                
-                let ud = UserDefaults.standard
-                ud.set(false, forKey: "isLogin")
-                ud.synchronize()
+                    let storyboard  = UIStoryboard(name: "SignIn", bundle: Bundle.main)
+                    let rootViewController = storyboard.instantiateViewController(withIdentifier:
+                        "RootNavigationController")
+                    
+                    
+                    let ud = UserDefaults.standard
+                    ud.set(false, forKey: "isLogin")
+                    ud.synchronize()
                 }})
         }
         

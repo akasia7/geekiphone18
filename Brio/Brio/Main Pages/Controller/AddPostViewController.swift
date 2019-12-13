@@ -27,7 +27,7 @@ class AddPostViewController: UIViewController, UINavigationControllerDelegate,UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         postTextView.placeholder = "思ったことを書き込もう！"
         postTextView.delegate = self
         
@@ -46,7 +46,7 @@ class AddPostViewController: UIViewController, UINavigationControllerDelegate,UI
     }
     
     func confirmContent() {
-    
+        
     }
     
     @IBAction func share() {

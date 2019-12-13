@@ -15,7 +15,7 @@ protocol EditUserInfoViewControllerDelegate {
 }
 
 class EditUserInfoViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
-    UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var userBackImageView: UIImageView!
@@ -27,13 +27,13 @@ class EditUserInfoViewController: UIViewController, UITextFieldDelegate, UITextV
     var imageChangedFlag = false
     var userNameChangedFlag = false
     var introductionChangedFlag = false
-
+    
     var resizedImage: UIImage!
     
     /*  viewDidLoad＝ViewControllerのviewがリロードされた後に呼び出される、
-        つまり立ち上げたときに最初に開かれる画面  */
+     つまり立ち上げたときに最初に開かれる画面  */
     /*  InterfaceBuilder(Storyboardやxib)を使用している場合、
-        サブビューのセットアップは一般的にここで行うことになる  */
+     サブビューのセットアップは一般的にここで行うことになる  */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,9 +48,9 @@ class EditUserInfoViewController: UIViewController, UITextFieldDelegate, UITextV
         
         
         userNameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-
-
-
+        
+        
+        
         
         let userId = NCMBUser.current().userName
         userIdTextField.text = userId
@@ -59,7 +59,7 @@ class EditUserInfoViewController: UIViewController, UITextFieldDelegate, UITextV
             userNameTextField.text = user.object(forKey: "displayName") as? String
             userIdTextField.text = user.userName
             introductionTextView.text = user.object(forKey: "introduction") as? String
-           
+            
             let file = NCMBFile.file(withName: user.objectId + ".png", data: nil) as!
             NCMBFile
             file.getDataInBackground { (data,error) in
@@ -83,9 +83,9 @@ class EditUserInfoViewController: UIViewController, UITextFieldDelegate, UITextV
             ud.synchronize()
         }
         
-    
+        
     }
-
+    
     //  viewWillAppear＝viewが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -107,7 +107,7 @@ class EditUserInfoViewController: UIViewController, UITextFieldDelegate, UITextV
         }
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -130,7 +130,7 @@ class EditUserInfoViewController: UIViewController, UITextFieldDelegate, UITextV
         return true
     }
     
-        //  画像を取り出す
+    //  画像を取り出す
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         SVProgressHUD.show()
@@ -140,7 +140,7 @@ class EditUserInfoViewController: UIViewController, UITextFieldDelegate, UITextV
         
         //  写真のサイズを小さくする
         let resizedImage = selectedImage.scaleImage(scaleSize: 0.1)
-    
+        
         
         picker.dismiss(animated: true, completion: nil)
         

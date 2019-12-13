@@ -11,11 +11,11 @@ import NCMB
 import Kingfisher
 import SVProgressHUD
 
-    //  クラス = 変数と関数をまとめたもの
-    //  データをまとめて１つのオブジェクト（もの）として扱える
-    //  特徴を引き継ぐことができる（継承）
-    //  クラスをもとに実態（インスタンス）が作成される
-    //  例）クラス＝「歌手」、インスタンス＝「あいみょん」
+//  クラス = 変数と関数をまとめたもの
+//  データをまとめて１つのオブジェクト（もの）として扱える
+//  特徴を引き継ぐことができる（継承）
+//  クラスをもとに実態（インスタンス）が作成される
+//  例）クラス＝「歌手」、インスタンス＝「あいみょん」
 class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, RoomTableViewCellDelegate {
     
     //  使用するデータの宣言
@@ -35,11 +35,11 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //  予期しないnil(空)の状態が見つかるエラーは、関連づけがされてない場合がある
     //  中身がnilのOptional型の変数をアンラップするとエラーが発生する
     @IBOutlet var RoomTableView: UITableView!
-
+    
     /*  viewDidLoad＝ViewControllerのviewがリロードされた後に呼び出される、
-        つまり立ち上げたときに最初に開かれる画面  */
+     つまり立ち上げたときに最初に開かれる画面  */
     /*  InterfaceBuilder(Storyboardやxib)を使用している場合、
-        サブビューのセットアップは一般的にここで行うことになる  */
+     サブビューのセットアップは一般的にここで行うことになる  */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,13 +57,12 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         
         setRefreshControl()
-                
+        
         loadTimeline()
         
         
     }
     
-    //  68~95が呼ばれない
     //  画像ファイルなど使用している大きなメモリファイルを解放する
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -77,18 +76,18 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if segue.identifier == "toTimeline" {
             let navi = segue.destination as! UINavigationController
             let controller = navi.children.first as! AddPostViewController
-
+            
         }
         
     }
     
     //  tableViewを表示するセルの数
     /*  Int型は整数、Double型は少数、String型は文字列、Char型は文字（記号としての一文字）
-        Bool型は真と偽を扱う  */
+     Bool型は真と偽を扱う  */
     //  型の変換を「キャスト」という
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
-    
+        
     }
     
     //  セルの表示内容
@@ -98,7 +97,7 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! RoomTableViewCell
         
         /*  postsというデータのまとまりの中から、textやuserNameといったデータを上から
-          順番に持ってきてる  */
+         順番に持ってきてる  */
         //  ?をつけると＝「nilが許容される」
         cell.contentLabel?.text = posts[indexPath.row].text
         
@@ -106,13 +105,12 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         cell.userNameLabel.text = user.displayName
         
-        //  ユーザーごとの画像が表示できないため固定の画像を表示
         let userImageUrl = "https://mbaas.api.nifcloud.com/2013-09-01/applications/HlgrPhqq9ECHzZT3/publicFiles/VKD52cVhRFPhLmTY.png"
-    
+        
         //  写真を丸くする
         cell.userImageView.layer.cornerRadius = cell.userImageView.bounds.width / 2.0
         cell.userImageView.layer.masksToBounds = true
-       
+        
         //　 いいね数を表示させている
         cell.likeCountLabel.text = String(posts[indexPath.row].likeCount)
         cell.tag = indexPath.row
@@ -138,7 +136,7 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         cell.delegate = self
-    
+        
         return cell
     }
     
@@ -146,9 +144,9 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //　 いいね機能
     func didTapLikeButton(tableViewCell: UITableViewCell, button: UIButton) {
         
-     //   guard文＝条件を満たさない場合の処理を記述する構文
-     //   current=現在
-     guard  let currentUser = NCMBUser.current() else {
+        //   guard文＝条件を満たさない場合の処理を記述する構文
+        //   current=現在
+        guard  let currentUser = NCMBUser.current() else {
             let storyboard  = UIStoryboard(name: "SignIn", bundle: Bundle.main)
             let rootViewController = storyboard.instantiateViewController(withIdentifier:
                 "RootNavigationController")
@@ -156,16 +154,16 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             let ud = UserDefaults.standard
             ud.set(false, forKey: "isLogin")
-        
-        //  synchronize＝同期する
+            
+            //  synchronize＝同期する
             ud.synchronize()
-        
-        //  return=スコープを抜けるための処理。メソッドなどで処理を終了し、呼び出し元に戻る
-        //  スコープ＝変数の有効範囲を表す、Swiftでは{}で囲まれた部分
+            
+            //  return=スコープを抜けるための処理。メソッドなどで処理を終了し、呼び出し元に戻る
+            //  スコープ＝変数の有効範囲を表す、Swiftでは{}で囲まれた部分
             return
         }
         
-    
+        
         if posts[tableViewCell.tag].isLiked == false || posts[tableViewCell.tag].isLiked == nil {
             let query = NCMBQuery(className: "Post")
             query?.getObjectInBackground(withId: posts[tableViewCell.tag].objectId, block: { (post, error) in
@@ -185,7 +183,7 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 if error != nil {
                     SVProgressHUD.showError(withStatus: error!.localizedDescription)
                 } else {
-                post?.removeObjects(in: [NCMBUser.current().objectId], forKey: "likeUser")
+                    post?.removeObjects(in: [NCMBUser.current().objectId], forKey: "likeUser")
                     post?.saveEventually({ (error) in
                         if error != nil {
                             SVProgressHUD.showError(withStatus: error!.localizedDescription)
@@ -207,8 +205,8 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         //  遷移させる(このとき、prepareForSegue関数で値を渡す)
         self.performSegue(withIdentifier: "toComments", sender: nil)
-}
-        
+    }
+    
     
     func didTapMenuButton(tableViewCell: UITableViewCell, button: UIButton) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -251,8 +249,8 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
-}
-
+    }
+    
     func loadTimeline() {
         guard  let currentUser = NCMBUser.current() else {
             let storyboard  = UIStoryboard(name: "SignIn", bundle: Bundle.main)
@@ -280,7 +278,7 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 SVProgressHUD.showError(withStatus: error!.localizedDescription)
             } else {
                 
-            //  投稿を格納しておく配列を初期化
+                //  投稿を格納しておく配列を初期化
                 self.posts = [Post]()
                 
                 for postObject in result as! [NCMBObject] {
@@ -289,14 +287,20 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     let user = postObject.object(forKey: "user") as! NCMBUser
                     
                     //  退会済みユーザーの投稿を避けるため、activeがfalse以外のモノだけを表示
-                    if user.object(forKey: "active") as? Bool != false {
-                        
+                    if user.object(forKey: "active") as? Bool !=
+                        false {
                         // 投稿したユーザーの情報をUserモデルにまとめる
-                        let userModel = User(objectId: user.objectId, userName: user.userName)
+                        // "userName"か"displayName"のデータがないためクラッシュ？
+                        //　新規会員時に"displayName"の登録をする必要がある？
+                        //  "userName"=「ユーザーID」
+                        //  "displayName"=「アカウント名」
+                        let userModel = User(objectId: user.objectId, userName: user.object(forKey: "userName") as! String)
+                        //  let userModel = User(objectId: user.objectId, userName: user.userName)
                         userModel.displayName = user.object(forKey: "displayName") as? String
                         
                         // 投稿の情報を取得
                         let imageUrl = user.object(forKey: "imageUrl") as! String
+                        
                         let text = postObject.object(forKey: "text") as! String
                         
                         // 2つのデータ(投稿情報と誰が投稿したか?)を合わせてPostクラスにセット
@@ -325,18 +329,18 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         })
     }
-
+    
     func setRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(reloadTimeline(refreshControl:)), for: .valueChanged)
         RoomTableView.addSubview(refreshControl)
     }
-
+    
     @objc func reloadTimeline(refreshControl: UIRefreshControl) {
         refreshControl.beginRefreshing()
         self.loadTimeline()
         
-         // 更新が早すぎるので2秒遅延させる
+        // 更新が早すぎるので2秒遅延させる
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             refreshControl.endRefreshing()
         }
@@ -354,7 +358,7 @@ extension RoomViewController: AddPostViewControllerDelegate {
     func refreshData() {
         loadTimeline()
     }
-
-
+    
+    
     
 }
